@@ -22,7 +22,7 @@ function setup() {
   background(0);
   target = new TargetParticle(createVector(width / 2, height / 2));
   seek = new SeekParticle(createVector(random(width), random(height)));
-  seekps = new SeekParticleSystem();
+  // seekps = new SeekParticleSystem();
   flock = new Flock();
   RdmParticle = new RandomParticleSystem();
 }
@@ -69,8 +69,8 @@ function draw() {
     seek.check();
     seek.render();
 
-    seekps.addParticle(seek);
-    seekps.run();
+    // seekps.addParticle(seek);
+    // seekps.run();
 
     if (blow == level) {
       flock.blowAway(seek.position);
