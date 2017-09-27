@@ -178,17 +178,15 @@ function scoreHandler() {
 }
 
 function keyPressed() {
-  if (keyCode == SHIFT) {
-    if (bomb > 0 && click === false) {
-      click = true;
-      bomb--;
-      energy -= level;
-    }
-  }
   return false;
 }
 
 function touchStarted() {
+  if (bomb > 0 && click === false) {
+    click = true;
+    bomb--;
+    energy -= level;
+  }
   return false;
 }
 
