@@ -6,7 +6,7 @@ var TargetParticle = function() {
     if(windowWidth>windowHeight) {
       //landscape
       var rx=map(rotationX,-60,60,-0.5,0.5);
-      var ry=map(rotationY,-60,60,-0.5,0.5);
+      var ry=map(rotationY,-60,60,0.5,-0.5);
     } else {
       // portrait
       var ry=map(rotationX,-60,60,-0.5,0.5);
