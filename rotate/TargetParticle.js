@@ -3,9 +3,17 @@ var TargetParticle = function() {
 
 
   this.control = function() {
-    var rx=map(rotationX,-60,60,-0.5,0.5);
-    var ry=map(rotationY,-60,60,-0.5,0.5);
-    var f = createVector(ry,rx);
+    if(windowWidth>windowHeight) {
+      //landscape
+      var rx=map(rotationX,-60,60,-0.5,0.5);
+      var ry=map(rotationY,-60,60,-0.5,0.5);
+    } else {
+      // portrait
+      var ry=map(rotationX,-60,60,-0.5,0.5);
+      var rx=map(rotationY,-60,60,-0.5,0.5);
+    }
+
+      var f = createVector(rx,ry);
     // if (keyIsDown(LEFT_ARROW)) {
     //   f.add(createVector(-0.5, 0));
     // }
