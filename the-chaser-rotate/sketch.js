@@ -143,6 +143,7 @@ function gameover() {
     if (score > highscore) {
       highscore = score;
     }
+    bomb = 0;
     push();
     rectMode(CENTER);
     fill(61);
