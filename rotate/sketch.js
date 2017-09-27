@@ -163,3 +163,7 @@ function scoreHandler() {
 function touchStarted() {
   return false;
 }
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
