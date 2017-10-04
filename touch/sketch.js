@@ -16,15 +16,19 @@ var click = false;
 var score = 0;
 var highscore = 0;
 var gameTime = 0;
+var restartShow =false;
 
 var em = [];
 var eg = [];
 var me = [];
+
 var btn = [];
 var left, right;
 var btn_size;
 var btn_center_size;
 var myFont;
+
+
 
 
 function preload() {
@@ -48,6 +52,7 @@ function preload() {
   btn[1] = loadImage('images/button_active.png');
   btn[2] = loadImage('images/button_center.png');
   myFont = loadFont('fonts/ShortStack-Regular.ttf');
+
 }
 
 function setup() {
@@ -68,7 +73,6 @@ function setup() {
 
 function draw() {
   if (over === true) {
-    background(255, 243, 224, 5);
     gameover();
   } else {
     background("#fff3e0");
@@ -147,25 +151,30 @@ function addRandomParticle() {
 }
 
 function gameover() {
-  if (score > highscore) {
-    highscore = score;
-  }
-  push();
-  rectMode(CENTER);
-  fill(61);
-  noStroke();
-  rect(width / 2, height / 2, 300, 180, 5);
-  fill("#FFF3E0");
-  textAlign(CENTER);
-  textSize(24);
-  text("Game Over!", width / 2, height / 2 - 40);
-  textSize(18);
-  text("Score:" + score, width / 2, height / 2);
-  text("Highest Score:" + highscore, width / 2, height / 2 + 20);
-  pop();
+  if(restartShow===false) {
+    restartShow=true;
+    background(255, 243, 224, 50);
+    if (score > highscore) {
+      highscore = score;
+    }
+    push();
+    rectMode(CENTER);
+    fill(61);
+    noStroke();
+    rect(width / 2, height / 2, 300, 180, 5);
+    fill("#FFF3E0");
+    textAlign(CENTER);
+    textSize(24);
+    text("Game Over!", width / 2, height / 2 - 40);
+    textSize(18);
+    text("Score:" + score, width / 2, height / 2);
+    text("Highest Score:" + highscore, width / 2, height / 2 + 20);
+    pop();
 
-  var btn_again = createButton("AGAIN");
-  btn_again.touchStarted(restart);
+    var btn_again = createButton("AGAIN");
+    btn_again.position(width / 2 - 60, height / 2 + 40)
+    btn_again.touchStarted(restart);
+  }
 }
 
 function scoreHandler() {
@@ -175,23 +184,42 @@ function scoreHandler() {
   }
 
   push();
-  fill("#212121");
+  fill(61);
   score = round(gameTime / 60) + allenergy * 10;
+  textSize(18);
   text("score: " + score, width - 100, 20)
   pop();
 }
 
-// function keyPressed() {
-//   if (keyCode == SHIFT) {
-//     if (bomb > 0 && click === false) {
-//       click = true;
-//       bomb--;
-//       energy -= level;
-//     }
-//   }
-//   return false;
-// }
-
-function touchMoved() {
+function keyPressed() {
+  if (keyCode == SHIFT) {
+    if (bomb > 0 && click === false) {
+      click = true;
+      bomb--;
+      energy -= level;
+    }
+  }
   return false;
+}
+
+function touchStarted() {
+  return false;
+}
+
+function restart() {
+  energy = 0;
+  bomb = 0;
+  gameTime = 0;
+  allenergy=0
+  over = false;
+  blow = 0;
+  click = false;
+  score = 0;
+  restartShow=false;
+  target = new TargetParticle(createVector(width / 2, height / 2));
+  seek = new SeekParticle(createVector(random(width), random(height)));
+  flock = new Flock();
+  RdmParticle = new RandomParticleSystem();
+  bomb = floor(energy / level);
+  removeElements();
 }
