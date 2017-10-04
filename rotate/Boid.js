@@ -1,11 +1,17 @@
 var Boid = function(position) {
   SeekParticle.call(this, position);
-  this.life = 700;
-  this.lifesub = 1;
-  this.r = 3;
+  this.life = 255;
+  this.lifesub = 5;
+  this.n = floor(random(1, 7));
+  this.size_random=random(0.3,0.6);
+  this.size = em[this.n].width * this.size_random;
   this.maxspeed = 1;
   // this.off = random(100);
-
+  
+  this.chase = function(target) {
+    var f = p5.Vector.sub(target, this.position);
+    return f;
+  }
   this.separate = function(boids) {
     var desiredseparation = 25;
     var steer = createVector(0, 0);
@@ -86,42 +92,21 @@ var Boid = function(position) {
     this.applyForce(coh);
   }
 
-  this.render = function() {
-    // push();
-    // noStroke();
-    // fill(255, 255, 0, this.life/100);
-    // var verti = 20; // number of curveVertex per ring
-    // var ang = TWO_PI / verti;
-    // for (var j = 0; j < 3; j++) {
-    //   beginShape();
-    //   for (var i = 0; i < verti; i++) {
-    //     var r = map(noise(this.off + i), 0, 1, -1, 1) * j;
-    //     var x = this.position.x + cos(ang * i) * (j * 2 + r);
-    //     var y = this.position.y + sin(ang * i) * (j * 2 + r);
-    //     curveVertex(x, y);
-    //   }
-    //   endShape(CLOSE);
-    //   pop();
-    //   this.off += 0.01;
-    // }
+  this.render = function(tar) {
     var angle = this.velocity.heading() + PI / 2;
     push();
-    fill(255, 255, 0, this.life);
-    noStroke();
     translate(this.position.x, this.position.y);
-    rotate(angle);
-    beginShape();
-
-    vertex(0, -this.r * 2);
-    vertex(-this.r, this.r * 2);
-    vertex(this.r, this.r * 2);
-    endShape(CLOSE);
+    rotate(angle); 
+    var off=p5.Vector.sub(tar,this.position);
+    off.setMag(1);   
+    image(em[0], off.x, off.y, em[0].width * this.size_random, em[0].height * this.size_random);
+    image(em[this.n], 0, 0, em[this.n].width * this.size_random, em[this.n].height * this.size_random);
     pop();
   }
 
-  this.isOver = function(tar) {
+  this.isOver = function(tar,s) {
     var dis = p5.Vector.dist(this.position, tar);
-    if (dis < this.r + 5) {
+    if (dis < (this.size + s)/2) {
       return true;
     } else {
       return false;
@@ -130,9 +115,7 @@ var Boid = function(position) {
 
   this.blowAwayForce = function(tar) {
     var f = p5.Vector.sub(this.position, tar);
-    var dis = p5.Vector.dist(this.position, tar);
-    f.setMag(10000);
-    f.div(dis * dis * 0.001);
+    f.setMag(20);
     this.acceleration.add(f);
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);

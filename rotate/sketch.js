@@ -1,66 +1,77 @@
 var target;
 var seek;
-var seekps;
+// var seekps;
 var flock;
 var RdmParticle;
-var d = 5;
+// var d = 0;
 
-var level = 3;
-var score = 0;
+var full = 8;
+var level = 1;
+var energy = 0;
+var allenergy=0;
+var bomb = 0;
 var over = false;
-var blow = 0;
-var timeScore = 0;
+var blowTime = 0;
+var click = false;
+var score = 0;
+var highscore = 0;
+var gameTime = 0;
+var restartShow =false;
 
-var img_back;
+var em = [];
+var eg = [];
+var me = [];
+
+
+
+
 
 function preload() {
-  img_back = loadImage('images/back.png');
+  em[0] = loadImage('images/em_shadow.png');
+  em[1] = loadImage('images/em1.png');
+  em[2] = loadImage('images/em2.png');
+  em[3] = loadImage('images/em3.png');
+  em[4] = loadImage('images/em4.png');
+  em[5] = loadImage('images/em5.png');
+  em[6] = loadImage('images/em6.png');
+  eg[0] = loadImage('images/eg_shadow.png');
+  eg[1] = loadImage('images/eg1.png');
+  eg[2] = loadImage('images/eg2.png');
+  eg[3] = loadImage('images/eg3.png');
+  eg[4] = loadImage('images/eg4.png');
+  eg[5] = loadImage('images/eg5.png');
+  eg[6] = loadImage('images/eg6.png');
+  me[0] = loadImage('images/red_shadow.png');
+  me[1] = loadImage('images/red.png');
+
 }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  background(0);
+  imageMode(CENTER);
   target = new TargetParticle(createVector(width / 2, height / 2));
   seek = new SeekParticle(createVector(random(width), random(height)));
   // seekps = new SeekParticleSystem();
   flock = new Flock();
   RdmParticle = new RandomParticleSystem();
+  bomb = floor(energy / level);
 }
 
 function draw() {
-
   if (over === true) {
-    background(0, 5);
     gameover();
   } else {
-    // background(0);
-    image(img_back, 0, 0, width, height);
-    if (frameCount < 600) {
-      push();
-      noStroke();
-      fill(255);
-      text("Rotate device to control the          dot", 5 * d, 50);
-      fill(255, 0, 0);
-      text("RED", 5 * d + 150, 50);
-      fill(255);
-      text("Dodge                  triangles", 5 * d, 70);
-      fill(255, 255, 0);
-      text("YELLOW", 5 * d + 40, 70);
-      fill(255);
-      text("Colloct               rectangles to blow triangles away", 5 * d, 90);
-      fill(0, 255, 0);
-      text("GREEN", 5 * d + 40, 90);
-      pop();
-    }
-
-    displayBoundaries();
+    background("#fff3e0");
+    // displayBoundaries();
 
     addFlock();
     addRandomParticle();
 
 
-    target.applyForce(target.control());
-    target.update();
+    // target.applyForce(target.control());
+
+
+    target.update(target.control());
     target.check();
     target.render();
 
@@ -72,26 +83,40 @@ function draw() {
     // seekps.addParticle(seek);
     // seekps.run();
 
-    if (blow == level) {
-      flock.blowAway(seek.position);
-      blow = 0;
+
+    if (click && blowTime === 0) {
+      blowTime++;
     }
 
-    flock.run(seek.position);
-    RdmParticle.run(seek.position);
+    if (blowTime < 20 && blowTime > 0) {
+      blowTime += 2;
+      push();
+      noFill();
+      stroke(255, 17, 44);
+      ellipse(seek.position.x, seek.position.y, blowTime * 100, blowTime * 100);
+      pop();
+      flock.blowAway(seek.position);
+    }
+
+    if (blowTime > 20) {
+      blowTime = 0;
+      click = false;
+    }
+
+    flock.run(seek.position,seek.size);
+    RdmParticle.run(seek.position,seek.size);
 
     scoreHandler();
   }
 }
 
-
-function displayBoundaries() {
-  push();
-  noFill();
-  stroke(255);
-  rect(d, d, width - d - d, height - d - d);
-  pop();
-}
+// function displayBoundaries() {
+//   push();
+//   noFill();
+//   stroke(255);
+//   rect(d, d, width - d - d, height - d - d);
+//   pop();
+// }
 
 function addFlock() {
   if (frameCount % 400 === 0) {
@@ -112,56 +137,76 @@ function addRandomParticle() {
 }
 
 function gameover() {
-  push();
-  rectMode(CENTER);
-  fill(0, 100);
-  stroke(255);
-  rect(width / 2, height / 2, 200, 100, 5);
-  fill(255);
-  noStroke();
-  text("Game Over!", width / 2 - 30, height / 2 - 20);
-  text("Score:" + timeScore, width / 2 - 25, height / 2);
-  pop();
-  var button = createButton('Play Again!');
-  button.position(width / 2 - 33, height / 2 + 10);
-  button.touchStarted(startagain());
-}
+  if(restartShow===false) {
+    restartShow=true;
+    background(255, 243, 224, 50);
+    if (score > highscore) {
+      highscore = score;
+    }
+    bomb = 0;
+    push();
+    rectMode(CENTER);
+    fill(61);
+    noStroke();
+    rect(width / 2, height / 2, 300, 180, 5);
+    fill("#FFF3E0");
+    textAlign(CENTER);
+    textSize(24);
+    text("Game Over!", width / 2, height / 2 - 40);
+    textSize(18);
+    text("Score:" + score, width / 2, height / 2);
+    text("Highest Score:" + highscore, width / 2, height / 2 + 20);
+    pop();
 
-function startagain() {
-  window.location.reload(true);
+    var btn_again = createButton("AGAIN");
+    btn_again.position(width / 2 - 60, height / 2 + 40)
+    btn_again.touchStarted(restart);
+  }
 }
 
 function scoreHandler() {
-  for (var i = 0; i < level; i++) {
-    push();
-    rectMode(CENTER);
-    translate(20 * d + i * 20, d * 3);
-    rotate(PI / 4);
-    fill(255, 50);
-    noStroke();
-    rect(0, 0, 8, 8);
-    pop();
+  gameTime++;
+  if(allenergy<energy){
+    allenergy=energy;
   }
 
-  for (var i = 0; i < score % level; i++) {
-    push();
-    rectMode(CENTER);
-    translate(20 * d + i * 20, d * 3);
-    rotate(PI / 4);
-    fill(0, 255, 0);
-    noStroke();
-    rect(0, 0, 8, 8);
-    pop();
-  }
   push();
-  fill(0, 255, 0);
-  timeScore = round(millis() / 100) + score * 10;
-  text("score: " + timeScore, 5 * d, d * 3.5)
+  fill(61);
+  score = round(gameTime / 60) + allenergy * 10;
+  textSize(18);
+  text("score: " + score, width - 100, 20)
   pop();
 }
 
-function touchStarted() {
+function keyPressed() {
   return false;
+}
+
+function touchStarted() {
+  if (bomb > 0 && click === false) {
+    click = true;
+    bomb--;
+    energy -= level;
+  }
+  return false;
+}
+
+function restart() {
+  energy = 0;
+  bomb = 0;
+  gameTime = 0;
+  allenergy=0
+  over = false;
+  blow = 0;
+  click = false;
+  score = 0;
+  restartShow=false;
+  target = new TargetParticle(createVector(width / 2, height / 2));
+  seek = new SeekParticle(createVector(random(width), random(height)));
+  flock = new Flock();
+  RdmParticle = new RandomParticleSystem();
+  bomb = floor(energy / level);
+  removeElements();
 }
 
 function windowResized() {

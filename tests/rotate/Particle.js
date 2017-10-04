@@ -20,16 +20,16 @@ var Particle = function(pos) {
   }
 
   Particle.prototype.check = function() {
-    if (this.position.x < this.size / 2) {
-      this.position.x = this.size / 2;
-    } else if (this.position.x > width - this.size / 2) {
-      this.position.x = width - this.size / 2;
+    if (this.position.x < d) {
+      this.position.x = d;
+    } else if (this.position.x > width - d) {
+      this.position.x = width - d;
     }
 
-    if (this.position.y < this.size / 2) {
-      this.position.y = this.size / 2;
-    } else if (this.position.y > height - this.size / 2) {
-      this.position.y = height - this.size / 2;
+    if (this.position.y < d) {
+      this.position.y = d;
+    } else if (this.position.y > height - d) {
+      this.position.y = height - d;
     }
   }
 
