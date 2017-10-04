@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1，user-scalable=no">
+
+  <title>The Chaser</title>
+  <script src="libraries/p5.js" type="text/javascript"></script>
+  <script src="libraries/p5.dom.js" type="text/javascript"></script>
+  <script src="sketch.js" type="text/javascript"></script>
+  <script src="Particle.js" type="text/javascript"></script>
+  <script src="TargetParticle.js" type="text/javascript"></script>
+  <script src="SeekParticle.js" type="text/javascript"></script>
+  <script src="Flock.js" type="text/javascript"></script>
+  <script src="Boid.js" type="text/javascript"></script>
+  <script src="RandomParticle.js" type="text/javascript"></script>
+  <script src="RandomParticleSystem.js" type="text/javascript"></script>
+  <script src="restart.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    window.addEventListener('load', function() {
+      document.body.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+      }, false); 
+    });
+  </script>
+  <style>
+    body {
+      font-family: Impact, Charcoal, sans-serif	
+      padding: 0;
+      margin: 0;
+    }
+    
+    canvas {
+      vertical-align: top;
+    }
+    
+    button {
+      background-color: #ff1744;
+      position: absolute;
+      text-align: center;
+      top: 295px;
+      border: none;
+      width: 30%;
+      height: 40px;
+      left:35%;
+      top:58%;
+      border-radius: 18px;
+      font-family: Impact, Charcoal, sans-serif	
+;
+      font-weight: bold;
+      font-size: 25px;
+      color: #fff3e0;
+    }
+    
+    button:active {
+      background-color: #ff5252;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+</html>
