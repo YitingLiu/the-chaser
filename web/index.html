@@ -26,17 +26,59 @@
       font-size: 8vmin;
       color: #ff1744;
       text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
-
     }
 
-    button {
-      background-color: #ff1744;
-      position: absolute;
+    p {
       text-align: center;
+      width:50%;
+      font-size: 3vmin;
+      color: #212121;
+      text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+      line-height: 4.5vmin;
+    }
+
+    #left {
+    	position: absolute;
+    	top:33%;
+    	left:0%;
+      width: 50vw;
+    }
+
+    #right{
+    	position: absolute;
+    	top:33%;
+    	right:0%;
+      width: 50vw;
+    }
+
+    p{
+      width: 35vw;
+    }
+
+    button:active {
+      background-color: #ff5252;
+    }
+
+    img {
+      width: 25vw;
+    }
+
+    p img {
+      height: 3vmin;
+      width: auto;
+    }
+
+    #bottom{
+      position: absolute;
       top:80%;
-      left:35%;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #bottom button {
+      background-color: #ff1744;
       border: none;
-      width: 30%;
+      min-width: 20vmax;
       height: 50px;
       border-radius:6px;
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -44,55 +86,36 @@
       font-size: 30px;
       color: #fff3e0;
     }
-    p {
-      text-align: center;
-      width:50%;
-      font-size: 20px;
-      color: #212121;
-      text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
-
-    }
-
-    #left {
-    	position: absolute;
-    	top:55%;
-    	left:0%;
-
-    }
-
-    #right{
-    	position: absolute;
-    	top:55%;
-    	right:0%;
-    }
-
-    button:active {
-      background-color: #ff5252;
-    }
   </style>
 </head>
 
 <body bgcolor="#fff3e0">
-  <div id="prevent">
-    <h1>THE    CHASER</h1>
-    <img src="images/shift.png" style="position:absolute; top:35%;left:12.5%; width:25%;">
-    <img src="images/direction.png" style="position:absolute; top:35%;right:12.5%; width:25%;">
-  </div>
-  <P id="left">Collect Energy: <img src="images/eg1.png" style="width: 5%">
-    <img src="images/eg2.png" style="width: 5%">
-    <img src="images/eg3.png" style="width: 5%">
-    <img src="images/eg4.png" style="width: 5%">
-    <img src="images/eg5.png" style="width: 5%">
-    <img src="images/eg6.png" style="width: 5%"></br>Then press "shift" to blow<br/>the enemies away.</P>
-  <P id="right">Press directional buttons<br/>to control the player character <img src="images/red.png" style="width: 6%"><br/>to dodge enemies: <img src="images/em1.png" style="width: 5%">
-    <img src="images/em2.png" style="width: 5%">
-    <img src="images/em3.png" style="width: 5%">
-    <img src="images/em4.png" style="width: 5%">
-    <img src="images/em5.png" style="width: 5%">
-    <img src="images/em6.png" style="width: 5%"></P>
-  <a href="game.html">
-    <button type="button">START</button>
-  </a>
+    <h1>THE CHASER</h1>
+    <div id="left" align="center">
+      <img src="images/shift.png">
+      <P>Collect Energy:
+      <img src="images/eg2.png">
+      <img src="images/eg6.png">
+      <img src="images/eg3.png">
+      <img src="images/eg1.png">
+      <img src="images/eg5.png">
+      <img src="images/eg4.png"> Then press "shift" to blow the enemies away.</P>
+    </div>
+    <div id="right" align="center">
+      <img src="images/direction.png">
+    <P>Press directional buttons to control the player character <img src="images/red.png"><br/>to dodge enemies:
+      <img src="images/em1.png">
+      <img src="images/em2.png">
+      <img src="images/em3.png">
+      <img src="images/em4.png">
+      <img src="images/em5.png">
+      <img src="images/em6.png"></P>
+    </div>
+    <div id="bottom" align="center">
+      <a href="game.html">
+        <button type="button" align="center">START</button>
+      </a>
+    </div>
 </body>
 
 </html>
