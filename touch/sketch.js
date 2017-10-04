@@ -24,7 +24,7 @@ var btn = [];
 var left, right;
 var btn_size;
 var btn_center_size;
-
+var myFont;
 
 
 function preload() {
@@ -45,13 +45,15 @@ function preload() {
   me[0] = loadImage('images/red_shadow.png');
   me[1] = loadImage('images/red.png');
   btn[0] = loadImage('images/button.png');
-  btn[1] = loadImage('images/button_active.png');  
+  btn[1] = loadImage('images/button_active.png');
   btn[2] = loadImage('images/button_center.png');
+  myFont = loadFont('fonts/ShortStack-Regular.ttf');
 }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   imageMode(CENTER);
+  textFont(myFont);
   target = new TargetParticle(createVector(width / 2, height / 2));
   seek = new SeekParticle(createVector(random(width), random(height)));
   // seekps = new SeekParticleSystem();
@@ -77,8 +79,8 @@ function draw() {
 
 
     // target.applyForce(target.control());
-    
-    
+
+
     target.update(target.control());
     target.check();
     target.render();

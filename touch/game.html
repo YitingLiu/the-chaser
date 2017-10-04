@@ -21,20 +21,23 @@
     window.addEventListener('load', function() {
       document.body.addEventListener('touchmove', function(event) {
         event.preventDefault();
-      }, false); 
+      }, false);
     });
   </script>
+  <link href="https://fonts.googleapis.com/css?family=Short+Stack" rel="stylesheet">
   <style>
+  *{
+    font-family: 'Short Stack', cursive;
+  }
     body {
-      font-family: Impact, Charcoal, sans-serif	
       padding: 0;
       margin: 0;
     }
-    
+
     canvas {
       vertical-align: top;
     }
-    
+
     button {
       background-color: #ff1744;
       position: absolute;
@@ -46,13 +49,11 @@
       left:35%;
       top:58%;
       border-radius: 18px;
-      font-family: Impact, Charcoal, sans-serif	
-;
       font-weight: bold;
       font-size: 25px;
       color: #fff3e0;
     }
-    
+
     button:active {
       background-color: #ff5252;
     }
