@@ -4,87 +4,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1，user-scalable=no">
-  <title>The Chaser</title>
+  <title>The Chaser - Web</title>
   <script type="text/javascript">
     window.addEventListener('load', function() {
       document.body.addEventListener('touchmove', function(event) {
         event.preventDefault();
-      }, false); 
+      }, false);
     });
   </script>
+  <link href="https://fonts.googleapis.com/css?family=Short+Stack" rel="stylesheet">
   <style>
+    *{
+      font-family: 'Short Stack', cursive;
+    }
     h1 {
       position: absolute;
       text-align: center;
       width: 100%;
-      top: 2%;
-      font-family: Impact, Charcoal, sans-serif	
-;
+      top: 5%;
       font-weight: bold;
-      font-size: 30px;
+      font-size: 8vmin;
       color: #ff1744;
-      text-shadow: 2px 4px 8px #999999;
+      text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+    }
 
-    }
-        
-    button {
-      background-color: #ff1744;
-      position: absolute;
-      text-align: center;
-      top:80%;
-      left:35%;
-      border: none;
-      width: 30%;
-      height: 50px;
-      border-radius: 18px;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      font-family: Impact, Charcoal, sans-serif	
-;
-      font-weight: bold;
-      font-size: 30px;
-      color: #fff3e0;
-    }
     p {
       text-align: center;
       width:50%;
-	    font-family: Impact, Charcoal, sans-serif	
-;
-      font-size: 20px;
+      font-size: 3vmin;
       color: #212121;
-      text-shadow: 1px 2px 4px #999999;
-
+      text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+      line-height: 4.5vmin;
     }
 
     #left {
-    	position: absolute;
-    	top:55%;
-    	left:0%;
-
+      position: absolute;
+      top:33%;
+      left:0%;
+      width: 50vw;
     }
 
     #right{
-    	position: absolute;
-    	top:55%;
-    	right:0%;
+      position: absolute;
+      top:33%;
+      right:0%;
+      width: 50vw;
     }
-    
+
+    p{
+      width: 35vw;
+    }
+
     button:active {
       background-color: #ff5252;
+    }
+
+    img {
+      width: 25vw;
+    }
+
+    p img {
+      height: 3vmin;
+      width: auto;
+    }
+
+    p span {
+      color: #ff1744;
+    }
+
+    #bottom{
+      position: absolute;
+      top:80%;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #bottom button {
+      background-color: #ff1744;
+      border: none;
+      min-width: 30vmax;
+      height: 50px;
+      border-radius:6px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      font-size: 30px;
+      color: #fff3e0;
     }
   </style>
 </head>
 
 <body bgcolor="#fff3e0">
-  <div id="prevent">
-    <h1>THE    CHASER</h1>
-    <img src="images/left.png" style="position:absolute; top:20%;left:5%; width:40%;">
-    <img src="images/right.png" style="position:absolute; top:20%;right:5%; width:40%;">
-  </div>
-  <P id="left">MOVE RED CIRCLE<br/>DODGE BLUE ENEMIES</P>
-  <P id="right">COLLECT YELLOW ENERGY<br/>TAP TO BLOW ENEMIES AWAY</P>
-  <a href="game.html">
-    <button type="button">START</button>
-  </a>
+    <h1>THE CHASER</h1>
+    <div id="right" align="center">
+      <img src="images/right.png">
+      <P>Collect Energy:
+      <img src="images/eg2.png">
+      <img src="images/eg6.png">
+      <img src="images/eg3.png">
+      <img src="images/eg1.png">
+      <img src="images/eg5.png">
+      <img src="images/eg4.png"> Then press <span>RIGHT</span> button to blow the enemies away.</P>
+    </div>
+    <div id="left" align="center">
+      <img src="images/left.png">
+    <P>Press and Move <span>LEFT</span> button to control the player character <img src="images/red.png"><br/>to dodge enemies:
+      <img src="images/em1.png">
+      <img src="images/em2.png">
+      <img src="images/em3.png">
+      <img src="images/em4.png">
+      <img src="images/em5.png">
+      <img src="images/em6.png"></P>
+    </div>
+    <div id="bottom" align="center">
+      <a href="game.html">
+        <button type="button" align="center">START</button>
+      </a>
+    </div>
 </body>
 
 </html>
