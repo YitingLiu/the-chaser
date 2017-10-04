@@ -21,7 +21,7 @@ var restartShow =false;
 var em = [];
 var eg = [];
 var me = [];
-
+var myFont;
 
 
 
@@ -43,12 +43,14 @@ function preload() {
   eg[6] = loadImage('images/eg6.png');
   me[0] = loadImage('images/red_shadow.png');
   me[1] = loadImage('images/red.png');
+  myFont = loadFont('fonts/ShortStack-Regular.ttf');
 
 }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   imageMode(CENTER);
+  textFont(myFont);
   target = new TargetParticle(createVector(width / 2, height / 2));
   seek = new SeekParticle(createVector(random(width), random(height)));
   // seekps = new SeekParticleSystem();
